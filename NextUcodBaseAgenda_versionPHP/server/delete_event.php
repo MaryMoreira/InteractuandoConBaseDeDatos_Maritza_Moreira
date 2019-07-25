@@ -11,7 +11,7 @@ $response['conexion'] = $con->initConection(); // inicia coneccion a la base de 
 session_start();
 
 // realiza la verificacion si se realizo la coneccion y existe la session
-if ($response['conexion'] == 'OK' && isset($_SESSION['iduser']) ) {
+if ($response['conexion'] == 'OK' && isset($_SESSION['iduser']) && $_POST['id'] >= 0) {
   // eliminamos el evento en la base de datos
   if($con->deleteData('events', 'idevent='.$_POST['id'])){
     $response['msg'] = "OK";
@@ -20,7 +20,7 @@ if ($response['conexion'] == 'OK' && isset($_SESSION['iduser']) ) {
   }
   //$response['msg'] = $con->insertData('events', $data);
 }else{
-  $response['msg'] = "Usuario no autorizado";
+  $response['msg'] = "No se ha eliminado el evento";
 }
 
 echo json_encode($response); //  envia la respuesta

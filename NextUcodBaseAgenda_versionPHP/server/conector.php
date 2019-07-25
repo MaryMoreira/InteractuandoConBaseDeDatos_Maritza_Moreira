@@ -107,7 +107,7 @@
       $i=1;
       foreach ($data as $key => $value) {
         $sql .= $key.'='.$value;
-        if ($i<sizeof($data)) {
+        if ($i<count($data)) {
           $sql .= ', ';
         }else $sql .= ' WHERE '.$condicion.';';
         $i++;

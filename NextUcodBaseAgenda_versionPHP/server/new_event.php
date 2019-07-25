@@ -16,7 +16,7 @@ if ($response['conexion'] == 'OK' && isset($_SESSION['iduser']) ) {
   $data['iduser']    = $_SESSION['iduser'];
   $data['title']     = "'".$_POST['titulo']."'";
   $data['startdate'] = "'".$_POST['start_date']."'";
-  if($_POST['allDay']){ // solo inserta lo que se espera
+  if(strval($_POST['allDay']) == 'true' ){ // solo inserta lo que se espera
     $data['allday']    = 1;
   }else{
     $data['starttime'] = "'".$_POST['start_hour'].":00'";
@@ -24,6 +24,7 @@ if ($response['conexion'] == 'OK' && isset($_SESSION['iduser']) ) {
     $data['endtime']   = "'".$_POST['end_hour'].":00'";
     $data['allday']    = 0;
   }
+
   // insertamos el evento en la base de datos
   if($con->insertData('events', $data)){
     $response['msg'] = "OK";
