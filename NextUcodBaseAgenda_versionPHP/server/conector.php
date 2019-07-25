@@ -7,20 +7,22 @@
 
   class ConectorBD
   {
+    private $db;
     private $host;
     private $user;
     private $password;
     private $conexion;
 
-    function __construct($host, $user, $password){
-      $this->host = $host;
-      $this->user = $user;
-      $this->password = $password;
+    function __construct($host = "", $user = "", $password = "", $db = ""){
+      $this->db       = $db       == "" ? 'agenda'    : $db ;      // nombre de la BD
+      $this->host     = $host     == "" ? 'localhost' : $host;     // direccion del BD
+      $this->user     = $user     == "" ? 'mary'      : $user;     // nombre del usuario en la BD
+      $this->password = $password == "" ? '12345'     : $password; // contraseña del usuario
     }
 
     // inicializamos la coneccion con la base de datos mysql ()
-    function initConection($db){
-      $this->conexion = new mysqli($this->host, $this->user, $this->password, $db);
+    function initConection(){
+      $this->conexion = new mysqli($this->host, $this->user, $this->password, $this->db);
       if ($this->conexion->connect_errno) {
         return "Error:" . $this->conexion->connect_error;
       }else {
@@ -84,10 +86,10 @@
       $i = 1;
       // coloca los datos de los campos a insertarse
       foreach ($data as $key => $value) {
-        $sql .= "\"".$value;
+        $sql .= $value;
         if ($i<count($data)) {
-          $sql .= "\"".', ';
-        }else $sql .= "\"".');';
+          $sql .= ', ';
+        }else $sql .= ');';
         $i++;
       }
       //return $sql;
@@ -147,17 +149,6 @@
         $sql .= $condicion.";";
       }
 
-      return $this->execQuery($sql);
-    }
-
-
-    function getViajesUser($user_id){
-      $sql = "SELECT co.nombre AS ciudad_origen, cd.nombre AS ciudad_destino, v.placa AS placa, v.fabricante AS fabricante, v.referencia AS referencia, a.fecha_salida AS fecha_salida, a.fecha_llegada AS fecha_llegada, a.hora_salida AS hora_salida, a.hora_llegada AS hora_llegada
-              FROM viajes AS a
-              JOIN ciudades AS co ON co.id = a.fk_ciudad_origen
-              JOIN ciudades AS cd ON cd.id = a.fk_ciudad_destino
-              JOIN vehiculos AS v ON v.placa = a.fk_vehiculo
-              WHERE a.fk_conductor = ".$user_id.";";
       return $this->execQuery($sql);
     }
 

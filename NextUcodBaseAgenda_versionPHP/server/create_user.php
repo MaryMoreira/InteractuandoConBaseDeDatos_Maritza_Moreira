@@ -1,5 +1,7 @@
 <?php
-
+/******************************************************************************
+ * Modulo que crea los usuarios por omision
+ *******************************************************************************/
 
 class CreateUsers
 {
@@ -19,16 +21,16 @@ class CreateUsers
 
     // inserta el usuario requerido en la base de datos si no existe aun
     function insertUser($pass, $name, $email, $birthdate){
-        $data['password']  = password_hash($pass, PASSWORD_DEFAULT);
+        $data['password']  = "'".password_hash($pass, PASSWORD_DEFAULT)."'";
         // consulta el usuario mencionado si existe caso contrario le creamos
-        $data['email']     = $email;
+        $data['email']     = "'".$email."'";
         $resp  =  $this->conexion->getData(['users'],
                                            ['email'],
-                                           'WHERE email="'.$data['email'].'"');
+                                           'WHERE email='.$data['email']);
 
         if(!$resp || $resp->num_rows == 0) { // inserta el registro si no existe
-            $data['name']      = $name;
-            $data['birthdate'] = $birthdate;
+            $data['name']      = "'".$name."'";
+            $data['birthdate'] = "'".$birthdate."'";
             $this->conexion->insertData('users', $data);
         }
     }

@@ -38,7 +38,7 @@ class EventsManager {
         		center: 'title',
         		right: 'month,agendaWeek,basicDay'
         	},
-        	defaultDate: '2016-11-01',
+        	defaultDate: '2019-07-01',
         	navLinks: true,
         	editable: true,
         	eventLimit: true,
@@ -99,20 +99,18 @@ class EventsManager {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val(),
-                allDay: true
+                allDay: true,
+                id : data.id
               })
             }else {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val()+" "+$('#start_hour').val(),
                 allDay: false,
-                end: $('#end_date').val()+" "+$('#end_hour').val()
+                end: $('#end_date').val()+" "+$('#end_hour').val(),
+                id : data.id
               })
             }
-
-
-
-
           }else {
             alert(data.msg)
           }
