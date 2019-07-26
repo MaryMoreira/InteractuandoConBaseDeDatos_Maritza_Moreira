@@ -9,13 +9,11 @@ let UserSchema = new Schema({
   pass :  { type: String, required: true},
   birthdate: { type: Date, required: true},
   events : [{
-      id        : { type: Number, required: true, unique: true},
-      title     : { type: String, required: true },
-      allDay    : { type : Boolean, require: true },
-      startDate : { type: String, required: true },
-      startTime : { type: String },
-      endDate   : { type: String },
-      endTime   : { type: String }
+      id     : { type: Number, required: true, unique: true},
+      title  : { type: String, required: true },
+      allDay : { type : Boolean, require: true },
+      start  : { type: String, required: true },
+      end    : { type: String, default:'' }
   }]
 })
 

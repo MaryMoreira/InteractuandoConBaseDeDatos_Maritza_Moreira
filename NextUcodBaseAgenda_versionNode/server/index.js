@@ -3,8 +3,10 @@ const http = require('http'),
       Routing = require('./routes.js'),
       express = require('express'),
       bodyParser = require('body-parser'),
-      mongoose = require('mongoose');
+      mongoose = require('mongoose'),
+      session = require('express-session');
 
+var   FileStore = require('session-file-store')(session)
 const PORT = 3000;      // puerto que escuchara el servidor
 const app = express();  // obtiene express
 // crea el servidor http
@@ -21,10 +23,19 @@ mongoose.connect('mongodb://localhost/agenda', function(err){
 });
 
 // configuracion de express
+app.use(session({
+  name: 'server-session-cookie-id',
+  secret: 'express',
+  saveUninitialized: true,
+  resave: true,
+  store: new FileStore()
+}));
 app.use(express.static('client'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use('/', Routing)
+
+
 
 // escucha el servidor http
 Server.listen(PORT, function() {

@@ -16,8 +16,20 @@ class EventManager {
 
     eliminarEvento(evento) {
         let eventId = evento.id
-        $.post('/events/delete/'+eventId, {id: eventId}, (response) => {
-            alert(response)
+        $.post('/events/delete', {id: eventId}, (response) => {
+            alert(response.msg)
+        })
+    }
+
+    actualizarEvento(evento) {
+        let event = {
+            id     : evento.id,
+            start  : moment(evento.start).format('YYYY-MM-DD HH:mm:ss'),
+            end    : evento.end ? moment(evento.end).format('YYYY-MM-DD HH:mm:ss') : "",
+            allDay : evento.allDay
+        }
+        $.post('/events/update', event, (response) => {
+            alert(response.msg);
         })
     }
 
@@ -29,6 +41,7 @@ class EventManager {
             title = $('#titulo').val(),
             end = '',
             start_hour = '',
+            allDay = true,
             end_hour = '';
 
             if (!$('#allDay').is(':checked')) {
@@ -37,18 +50,23 @@ class EventManager {
                 end_hour = $('#end_hour').val()
                 start = start + 'T' + start_hour
                 end = end + 'T' + end_hour
+                allDay = false
             }
             let url = this.urlBase + "/new"
             if (title != "" && start != "") {
                 let ev = {
                     title: title,
                     start: start,
-                    end: end
+                    end: end,
+                    allDay : allDay
                 }
                 $.post(url, ev, (response) => {
-                    alert(response)
+                    alert(response.msg)
+                    if(response.error) return;
+                    ev.id = response.id;
+                    $('.calendario').fullCalendar('renderEvent', ev)
                 })
-                $('.calendario').fullCalendar('renderEvent', ev)
+
             } else {
                 alert("Complete los campos obligatorios para el evento")
             }
@@ -87,7 +105,7 @@ class EventManager {
                 center: 'title',
                 right: 'month,agendaWeek,basicDay'
             },
-            defaultDate: '2016-11-01',
+            defaultDate: '2019-07-01',
             navLinks: true,
             editable: true,
             eventLimit: true,
