@@ -10,15 +10,16 @@ Router.post('/login', function(req, res) {
 
     // busca los usuarios correspondientes
     Users.findOne({email: name}).exec(function(err, doc){
-        if (err) {
-            res.send("Usuario no valido");
+        if (err || !doc) { // si existe error o no existe el registro
+            res.send("Usuario inexistente");
+            return;
         }
+        // verifica que la contraseña sea la correcta
         if(pass == Crypt.decrypt(doc.pass)){
-            res.json('Validado');
+            res.send('Validado');
         }else{
-            res.json('Contraseña invalida');
+            res.send('Contraseña invalida');
         }
-
     })
 })
 
