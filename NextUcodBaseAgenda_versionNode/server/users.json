@@ -1,0 +1,28 @@
+[
+    {
+        "id"        :  1,
+        "name"      : "Maritza Moreira",
+        "email"     : "maritza@nextui.com",
+        "birthdate" : "1983-07-23",
+        "pass"      : "12345",
+        "events"    : []
+    },
+
+    {
+        "id"        :  2,
+        "name"      : "Tutor1",
+        "email"     : "tutor1@nextui.com",
+        "birthdate" : "1984-12-25",
+        "pass"      : "12345",
+        "events"    : []
+    },
+
+    {
+        "id"        :  3,
+        "name"      : "Tutor2",
+        "email"     : "tutor2@nextui.com",
+        "birthdate" : "1977-08-05",
+        "pass"      : "12345",
+        "events"    : []
+    }
+]

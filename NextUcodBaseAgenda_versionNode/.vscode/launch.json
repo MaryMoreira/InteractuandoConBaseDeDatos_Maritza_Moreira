@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Node",
+            "program": "${workspaceRoot}/server/index.js",
+            "args": [
+                ""
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "NODE_ENV":"development",
+                "npm_lifecycle_event":"dev",
+            }
+        }
+    ]
+}

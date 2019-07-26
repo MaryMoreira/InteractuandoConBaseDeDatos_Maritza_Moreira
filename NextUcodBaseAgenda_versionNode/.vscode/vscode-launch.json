@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "smfw",
+            // "program": "${workspaceFolder}/node_modules/umi/bin/umi.js",
+            "program": "${workspaceFolder}/node_modules/umi/lib/scripts/realDev.js",
+            "cwd": "${workspaceFolder}",
+            "args": ["dev"],
+            "runtimeArgs": [
+                "--inspect-brk"
+            ],
+            //"port": 5858,
+            //"runtimeExecutable": "d:/node_8/node",
+            "runtimeExecutable": "C:/Program Files (x86)/nodejs/node.exe",
+            "env": {
+                "UMI_DIR":"${workspaceFolder}/node_modules/umi"
+            },
+            //"env": {
+            //    "COMPRESS": "none",
+            //    "BROWSER": "none",
+            //    "BABEL_CACHE": "none",
+            //    "CLEAR_CONSOLE": "none",
+            //    "HMR": "none",
+            //    "HTML": "none"
+            //},
+            //"sourceMaps": false
+       }
+    ]
+}
