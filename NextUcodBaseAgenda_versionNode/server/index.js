@@ -6,11 +6,10 @@ const http = require('http'),
       mongoose = require('mongoose'),
       session = require('express-session');
 
-var   FileStore = require('session-file-store')(session)
 const PORT = 3000;      // puerto que escuchara el servidor
 const app = express();  // obtiene express
 // crea el servidor http
-const Server = http.createServer(app)
+const Server = http.createServer(app);
 
 // conecta la base de datos
 mongoose.connect('mongodb://localhost/agenda', function(err){
@@ -27,8 +26,7 @@ app.use(session({
   name: 'server-session-cookie-id',
   secret: 'express',
   saveUninitialized: true,
-  resave: true,
-  store: new FileStore()
+  resave: true
 }));
 app.use(express.static('client'))
 app.use(bodyParser.json())

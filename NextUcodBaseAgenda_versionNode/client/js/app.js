@@ -2,9 +2,18 @@
 class EventManager {
     constructor() {
         this.urlBase = "/events"
+        this.logout();
         this.obtenerDataInicial()
         this.inicializarFormulario()
         this.guardarEvento()
+    }
+
+    logout(){
+        $('.logout-container').click( (e) => {
+            $.post('/logout', {msg: 'logout'}, (response) => {
+                window.location.href = "http://localhost:3000/index.html"
+            })
+        })
     }
 
     obtenerDataInicial() {

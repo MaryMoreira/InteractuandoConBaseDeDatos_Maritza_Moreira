@@ -24,6 +24,19 @@ Router.post('/login', function(req, res) {
     })
 })
 
+// atiende al logout
+Router.post('/logout', function(req, res) {
+
+    let userId = req.session.data.id;
+    // valida que la session sea valida
+    if(!userId){
+        res.send("Usuario no autorizado");
+        return;
+    }
+    req.session.data.id = undefined;
+    res.send("logout");
+})
+
 // obtiene todos los eventos del usuario
 Router.get('/events/all', function(req, res) {
     let userId = req.session.data.id;

@@ -197,6 +197,10 @@ input {
   display: flex;
 }
 
+.logout-container:hover {
+  cursor: pointer;
+}
+
 .logout-image {
   margin-right: 6px;
 }
