@@ -130,7 +130,7 @@ class EventManager {
                 if (jsEvent.pageX >= x1 && jsEvent.pageX<= x2 &&
                     jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
                         this.eliminarEvento(event)
-                        $('.calendario').fullCalendar('removeEvents', event.id);
+                        $('.calendario').fullCalendar('removeEvents', event._id);
                     }
                 }
             })

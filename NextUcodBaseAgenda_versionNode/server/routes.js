@@ -66,7 +66,7 @@ Router.post('/events/new', function(req, res) {
                 res.json({ error: true, msg : "Error update: " + err} );
                 return;
             }
-            res.json({ error: false, msg : "Se insertó el evento satisfactoriamente"} );
+            res.json({ id: event.id, error: false, msg : "Se insertó el evento satisfactoriamente"} );
         })
     })
 
@@ -82,7 +82,7 @@ Router.post('/events/delete', function(req, res) {
     }
 
     // actualiza los eventos del usuario, eliminando el evento
-    Users.update({id: userId}, { $pullAll  : { 'events.id' : req.body.id  } }, (error, result) => {
+    Users.update( { id: userId } , { $pull  : { events : { id : req.body.id }  } }, (error, result) => {
         if (error){
             res.json({ error: true, msg : "Error eliminar: " + err} );
             return;
